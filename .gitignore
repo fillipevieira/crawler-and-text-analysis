@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.idea/
 
 # selenium
 geckodriver.log
@@ -12,6 +11,7 @@ geckodriver.log
 
 # Distribution / packaging
 .Python
+.idea/
 build/
 develop-eggs/
 dist/
