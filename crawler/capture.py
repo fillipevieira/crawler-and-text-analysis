@@ -13,7 +13,12 @@ class Capture(object):
         try:
             for url in SITES:
                 self.__log.info("Crawling site: {}".format(url))
-                self.__driver.get(url=url)
+                try:
+                    self.__driver.get(url=url)
+                except:
+                    self.__log.error("An error ocurred while visiting website: {}. Skipping to next..."
+                                     .format(url))
+                    continue
 
                 self.__log.info('Waiting {} secs'.format(str(self._sleep)))
                 time.sleep(self._sleep)
