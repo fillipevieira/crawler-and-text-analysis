@@ -7,7 +7,7 @@ class Capture(object):
     def __init__(self, log, driver):
         self.__log = log
         self.__driver = driver
-        self._sleep = 5
+        self._sleep = 7
 
     def start(self):
         try:
