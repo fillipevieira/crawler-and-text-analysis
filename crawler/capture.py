@@ -12,6 +12,8 @@ class Capture(object):
     def start(self):
         try:
             for url in SITES:
+                html = None
+
                 self.__log.info("Crawling site: {}".format(url))
                 try:
                     self.__driver.get(url=url)
