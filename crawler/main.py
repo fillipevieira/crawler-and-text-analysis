@@ -29,5 +29,5 @@ if __name__ == '__main__':
         crawler.start()
 
     except Exception as exc:
-        logging.error("Erro: {}".format(str(exc)))
+        logging.error("Error: {}".format(str(exc)))
 
