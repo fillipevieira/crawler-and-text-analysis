@@ -4,11 +4,9 @@ from bs4 import BeautifulSoup
 
 def denoise_content(text):
     """
-    :param
-        text: all content of the page.
+    :param text: all content of the page.
+    :return: noise-free text
 
-    :return:
-        noise-free text
     """
     text = get_html(text)
     text = remove_trailing_newline(text)
@@ -16,22 +14,18 @@ def denoise_content(text):
 
 def get_html(text):
     """
-    :param
-        text: all content of the page.
+    :param text: all content of the page.
+    :return text: with no HTML markups
 
-    :return:
-        text with no HTML markups
     """
     soup = BeautifulSoup(text, "html.parser")
     return soup.get_text()
 
 def remove_trailing_newline(text):
     """
-    :param
-        text: text with no HTML markups
+    :param text: text with no HTML markups
+    :return text: without newllines
 
-    :return:
-        text without newllines
     """
     text = text.replace("\n", '')
     return text

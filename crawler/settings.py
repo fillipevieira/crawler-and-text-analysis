@@ -3,11 +3,11 @@ GECKODRIVER = ""
 
 
 ####################### CRAWLING #######################
-SITES = ['https://www.ig.com.br', 'https://veja.abril.com.br', 'https://www.samsung.com.br',
-        'https://noticias.uol.com.br', 'https://www.folha.uol.com.br', 'https://www.estadao.com.br',
-        'https://www.r7.com', 'https://www.metropoles.com', 'https://www.bol.uol.com.br', 'https://imasters.com.br',
-        'https://edition.cnn.com', 'https://www.band.uol.com.br', 'https://bandsports.band.uol.com.br',
-        'https://olhardigital.com.br', 'https://tecnoblog.net', 'https://www.kabum.com.br', 'https://www.apple.com']
+SITES = ['https://edition.cnn.com', 'https://www.nbcnews.com', 'hhttps://www.huffpost.com',
+        'https://www.cbsnews.com', 'https://www.usatoday.com', 'https://www.nytimes.com',
+        'https://www.foxnews.com', 'https://www.dailymail.co.uk', 'https://www.washingtonpost.com',
+        'https://bleacherreport.com', 'https://www.businessinsider.com', 'https://www.elitedaily.com'
+        'https://www.bbc.com', 'https://www.theguardian.com', 'https://www.latimes.com', 'https://nypost.com']
 
 
 ####################### TESTS #######################
