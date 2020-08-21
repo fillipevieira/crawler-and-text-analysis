@@ -4,6 +4,9 @@ from selenium import webdriver
 import logging
 
 def get_webdriver():
+    """
+    :return: Firefox driver for capture
+    """
     try:
         logging.debug("Setting webdriver")
         driver = webdriver.Firefox(executable_path=GECKODRIVER)

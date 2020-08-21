@@ -10,6 +10,10 @@ class Capture(object):
         self._sleep = 7
 
     def start(self):
+        """
+        Process to capture HTML pages from links list
+
+        """
         try:
             for url in SITES:
                 html = None
@@ -37,6 +41,13 @@ class Capture(object):
             raise
 
     def __save_file(self, url, html):
+        """
+        Save a file with HTML content
+
+        :param url: Site link used to capture
+        :param html: HTML code of page
+
+        """
         try:
             self.__log.info("Saving file...")
             filename = self.get_file_name(url)
@@ -52,5 +63,14 @@ class Capture(object):
 
     @staticmethod
     def get_file_name(url):
+        """
+        :param url: Site link used to capture
+        :return: A file name based on link
+
+        """
         filename = url.split("//")[1]
         return filename
+
+
+if __name__ == '__main__':
+    help(Capture.start)
