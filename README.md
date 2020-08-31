@@ -27,7 +27,7 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 
 1. Faça download do código fonte ou clone o repositório;
 2. Acesse a pasta do projeto;
-3. Rode o comando `pip install requirements.txt` para instalar todas as dependências do projeto; 
+3. Rode o comando `pip install -r requirements.txt` para instalar todas as dependências do projeto; 
 
 ### Configurando geckoriver
 ##### Caso o sistema operacional seja Linux:
