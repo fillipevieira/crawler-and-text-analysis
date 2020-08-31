@@ -21,6 +21,14 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 ### Pré-requisitos
 
  - Instalar [Python 3](https://www.python.org/downloads/) e [pip](https://pip.pypa.io/en/stable/installing/) (gerenciador de pacotes do Python).
+    - Verifique se estão instalados corretamente no sistema usando os seguintes comandos de terminal:
+    
+        ```bash
+        $ python --version
+        Python 3.7.1
+        $ pip --version 
+        pip 18.1 
+        ```
  - Baixar o [geckodriver](https://github.com/mozilla/geckodriver/releases) (Driver do Firefox/Chrome para o Selenium).
 
 ### Instalando as bibliotecas
