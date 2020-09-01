@@ -38,7 +38,6 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 3. Rode o comando `pip install -r requirements.txt` para instalar todas as dependências do projeto; 
 
 ### Configurando geckoriver
-##### Caso o sistema operacional seja Linux:
 1. Com o [geckodriver](https://github.com/mozilla/geckodriver/releases) já baixado, coloque o arquivo em um diretório de sua escolha;
 2. Salve o path do local do arquivo;
 2. Acesse o diretório `crawler/` , edite o arquivo [settings.py](crawler/settings.py) e acrescente o path do arquivo do geckodriver, conforme exemplo abaixo:
@@ -46,9 +45,6 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 ####################### SELENIUM #######################
 GECKODRIVER = "/var/driver/geckodriver"
 ```
-##### Caso o sistema operacional seja Windows:
-1. Com o [geckodriver](https://github.com/mozilla/geckodriver/releases) já baixado, coloque o arquivo em um diretório de sua escolha (de preferência no C:);
-2. Acesse as variáveis de ambiente do sistema e edite a variével PATH (ou 'Path' dependendo do seu sistema) acrescentando o path do arquivo do geckodriver;
 
 ## <a name="web-crawler"></a>Web Crawler
 
