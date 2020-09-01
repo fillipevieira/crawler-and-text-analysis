@@ -1,5 +1,6 @@
 from crawler.settings import SITES
 import time
+import os
 
 
 class Capture(object):
@@ -9,6 +10,7 @@ class Capture(object):
         self.__driver = driver
         self._sites = SITES
         self._sleep = 7
+        self.create_html_directory_if_not_exists()
 
     def start(self):
         """
@@ -60,6 +62,11 @@ class Capture(object):
         except Exception as exc:
             self.__log.error("An error ocurred while saving file: {}".format(str(exc)))
             raise
+
+    @staticmethod
+    def create_html_directory_if_not_exists():
+        if not os.path.exists('htmls/'):
+            os.makedirs('htmls/')
 
 
 if __name__ == '__main__':

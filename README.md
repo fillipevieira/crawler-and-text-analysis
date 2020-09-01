@@ -65,7 +65,7 @@ Ao fim, dentro do diretório `crawler/`, execute o arquivo [main.py](crawler/mai
 $ python main.py
 ```
 
-O processo de crawling será iniciado e os HTML's serão salvos no diretório `htmls/`.
+O processo de crawling será iniciado e os HTML's serão salvos no diretório `crawler/htmls/` que, por sua vez, é criado automaticamente.
 
 ## <a name="pre-process"></a>Pré Processamento de Texto
 
