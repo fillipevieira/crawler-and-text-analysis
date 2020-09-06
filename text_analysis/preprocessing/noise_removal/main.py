@@ -1,3 +1,4 @@
+from text_analysis.settings import HTML_TO_HANDLE
 from bs4 import BeautifulSoup
 import contractions
 
@@ -43,10 +44,8 @@ def remove_contractions(text):
 
 if __name__ == '__main__':
     try:
-        file_to_handle = ""  # Ex: pronounced-dead-michigan.html
-
         content = None
-        with open('../../../htmls/'+file_to_handle, 'r') as file:
+        with open('../../../htmls/' + HTML_TO_HANDLE, 'r') as file:
             if file.mode == 'r':
                 content = file.read()
 
@@ -54,7 +53,7 @@ if __name__ == '__main__':
             denoised_content = denoise_content(content)
 
             with open('../noise-free-text.txt', 'w') as file:
-                content = file.write(denoised_content)
+                file.write(denoised_content)
 
 
     except Exception as exc:

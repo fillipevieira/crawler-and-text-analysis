@@ -58,7 +58,8 @@ SITES = {'pronounced-dead-michigan': 'https://www.mlive.com/news/2020/08/pronoun
          'pirates-claim-former': 'https://www.mlive.com/tigers/2020/08/pirates-claim-former-tigers-pitcher-off-waivers.html',
          'tigers-cubs-lineup':  'https://www.mlive.com/tigers/2020/08/tigers-cubs-lineup-schoop-returns-candelario-remains-in-the-clean-up-spot.html'}
 ```
-> **Note**: Os links desejados para captura são dispostos em um estrutura de dicionário (chave-valor), onde a chave é o nome do arquivo em que o HTML vai ser salvo, e o valor é o link para a captura.
+> **Note**: Os links desejados para captura são dispostos em um estrutura de dicionário (chave-valor) denominada SITES, onde a chave é o nome do arquivo em que o HTML vai ser salvo, e o valor é o link para a captura.
+> Dentro desse arquivo [settings.py](crawler/settings.py), já contém alguns links públicos para utilização em testes. 
 
 Ao fim, dentro do diretório `crawler/`, execute o arquivo [main.py](crawler/main.py) com o seguinte comando:
 ```bash
