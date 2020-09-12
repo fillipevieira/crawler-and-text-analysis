@@ -1,60 +1,57 @@
-from text_analysis.settings import HTML_TO_HANDLE
 from bs4 import BeautifulSoup
 import contractions
 
-# This module creates a noise-free text from HTML page
 
-def denoise_content(html):
-    """
-    :param html: all content of the page.
-    :return text: noise-free text
+class NoiseRemoval(object):
 
-    """
-    text = get_html(html=html)
-    text = remove_newline(text=text)
-    text = remove_contractions(text=text)
-    return text
+    def __init__(self):
+        self.__content = None
+        self.__denoised_content = None
 
-def get_html(html):
-    """
-    :param text: all content of the page.
-    :return text with no HTML markups
+    def __denoise_content(self, html):
+        """
+        Return noise-free text
+        """
+        text = self.__get_html(html=html)
+        text = self.__remove_newline(text=text)
+        text = self.__remove_contractions(text=text)
+        return text
 
-    """
-    soup = BeautifulSoup(html, "html.parser")
-    return soup.get_text()
+    @staticmethod
+    def __get_html(html):
+        """
+        Return text with no HTML markups
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        return soup.get_text()
 
-def remove_newline(text):
-    """
-    :param text: text with no HTML markups
-    :return text: without newllines
+    @staticmethod
+    def __remove_newline(text):
+        """
+        Return text without newllines
+        """
+        text = text.replace("\n", '')
+        return text
 
-    """
-    text = text.replace("\n", '')
-    return text
+    @staticmethod
+    def __remove_contractions(text):
+        """
+        Return text without contractions. Ex: can't -> can not
+        """
+        return contractions.fix(text)
 
-def remove_contractions(text):
-    """
-    :param text: text with contractions
-    :return text: without contractions. Ex: can't -> can not
+    def start(self, filename):
+        try:
+            with open('../../htmls/' + filename, 'r') as file:
+                if file.mode == 'r':
+                    self.__content = file.read()
 
-    """
-    return contractions.fix(text)
+            if self.__content:
+                self.__denoised_content = self.__denoise_content(html=self.__content)
 
+                with open('noise-free-text.txt', 'w') as file:
+                    file.write(self.__denoised_content)
 
-if __name__ == '__main__':
-    try:
-        content = None
-        with open('../../../htmls/' + HTML_TO_HANDLE, 'r') as file:
-            if file.mode == 'r':
-                content = file.read()
-
-        if content:
-            denoised_content = denoise_content(content)
-
-            with open('../noise-free-text.txt', 'w') as file:
-                file.write(denoised_content)
-
-
-    except Exception as exc:
-        print('Error: {}'.format(str(exc)))
+        except Exception as exc:
+            print('Noise Removal error: {}'.format(str(exc)))
+            raise
