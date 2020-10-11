@@ -8,6 +8,10 @@ Esse algoritmo tera como entradas:
 
 Tera como retorno quais os indices na string do texto que deram match com o padrao.
 
+Pontos negativos:
+ - se o padrao tem um tamanho muito pesqueno, tipo uma ṕalavra "e", o algoritmo sempre vai pegar janelas desse mesmo
+   tamanho e, nesse caso, palavras com "e" no meio dariam matches sem ser exatamente a palavra isolada.
+
 """
 
 
@@ -27,9 +31,19 @@ def brute_force(text, pattern):
     return integers
 
 
-# Driver Code
-txt = "GEEKS FOR GEEKS"
-pat = "GEEK"
+if __name__ == "__main__":
 
-a = brute_force(txt, pat)
-print("[BRUTE FORCE] match positions: ", ",".join(a))
+    # Faz a leitura do arquivo que contem o texto preprocessado de um HTML
+    with open("../../preprocessing/noise-free-text.txt", "r") as file:
+        text = file.read().lower()
+
+    # Faz a leitura do arquivo que contem com as palavras preprocessadas de um HTML
+    with open("../../preprocessing/normalized-text.txt", "r") as file:
+        words = [word.replace("\n", "") for word in file.readlines()]
+        words = list(set(words))
+
+    # Aplica o algoritmo utilizando o texto preprocessado de um HTML e cada palavra da lista de
+    # palavras preprocessadas de um HTML
+    for word in words:
+        matched_indexes = brute_force(text=text, pattern="e")
+        print("[BRUTE FORCE ALGORITHM] Word: {} | Matched indexes: {}".format(word, ",".join(matched_indexes)))
