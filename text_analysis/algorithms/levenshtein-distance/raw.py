@@ -1,5 +1,13 @@
 import numpy as np
 
+"""
+Esse algoritmo tera como 2 textos
+
+Tera como retorno uma porcentagem de similaridade entre os dois textos com base no numero de edicoes necessarias para 
+uma string ficar igual a outra.  
+
+"""
+
 
 def levenshtein_ratio_and_distance(s, t, ratio_calc = False):
     # Initialize matrix of zeros
@@ -43,5 +51,5 @@ Str1 = "azced"
 Str2 = "abcdef"
 # Distance = levenshtein_ratio_and_distance(Str1,Str2)
 # print(Distance)
-Ratio = levenshtein_ratio_and_distance(Str1,Str2,ratio_calc = True)
+Ratio = levenshtein_ratio_and_distance(Str1, Str2, ratio_calc=True)
 print(Ratio)
