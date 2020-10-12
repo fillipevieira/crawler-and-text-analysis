@@ -47,9 +47,10 @@ def levenshtein_ratio_and_distance(s, t, ratio_calc = False):
         return "The strings are {} edits away".format(distance[row][col])
 
 
-Str1 = "azced"
-Str2 = "abcdef"
-# Distance = levenshtein_ratio_and_distance(Str1,Str2)
-# print(Distance)
-Ratio = levenshtein_ratio_and_distance(Str1, Str2, ratio_calc=True)
-print(Ratio)
+if __name__ == "__main__":
+    Str1 = "azced"
+    Str2 = "abcdef"
+    # Distance = levenshtein_ratio_and_distance(Str1,Str2)
+    # print(Distance)
+    Ratio = levenshtein_ratio_and_distance(Str1, Str2, ratio_calc=True)
+    print(Ratio)

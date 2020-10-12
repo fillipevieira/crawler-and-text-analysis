@@ -8,12 +8,16 @@ Esse algoritmo tera como entradas:
 
 Tera como retorno quais os indices na string do texto que deram match com o padrao.
 
+Pontos negativos:
+ - se o padrao tem um tamanho muito pequeno, tipo uma ṕalavra "e", o algoritmo sempre vai pegar janelas desse mesmo
+   tamanho e, nesse caso, palavras com "e" no meio dariam matches sem ser exatamente a palavra isolada.
+
 """
 
 def rabin_karp(text, pattern, d, q):
     n = len(text)
     m = len(pattern)
-    h = pow(d, m-1) % q  # o %q evta o estouro do inteiro
+    h = pow(d, m-1) % q  # o %q evita o estouro do inteiro
     p = 0
     t = 0
     result = []
@@ -41,15 +45,35 @@ def rabin_karp(text, pattern, d, q):
     return result
 
 
-# Driver Code
-txt = "GEEKS FOR GEEKS"
-pat = "GEEK"
+if __name__ == "__main__":
 
-# A prime number for hash function; this will reduce computation
-q = 101
+    # Faz a leitura do arquivo que contem o texto preprocessado de um HTML
+    with open("../../preprocessing/noise-free-text.txt", "r") as file:
+        text = file.read().lower()
 
-# numero de caracteres no alfabeto de entrada
-d = 256
+    # Faz a leitura do arquivo que contem com as palavras preprocessadas de um HTML
+    with open("../../preprocessing/normalized-text.txt", "r") as file:
+        words = [word.replace("\n", "") for word in file.readlines()]
+        words = list(set(words))
 
-a = rabin_karp(txt, pat, d, q)
-print("[RABIN KARP] match positions: ", ",".join(a))
+    # Aplica o algoritmo utilizando o texto preprocessado de um HTML e cada palavra da lista de
+    # palavras preprocessadas de um HTML
+    matched_indexes_amount = 0
+    for word in words:
+        q = 101  # A prime number for hash function; this will reduce computation
+        d = 256  # numero de caracteres no alfabeto de entrada
+        matched_indexes = rabin_karp(text=text, pattern=word, d=d, q=q)
+        if matched_indexes:
+            matched_indexes_amount += 1
+
+        print("[RABIN KARP ALGORITHM] Word: {} | Matched indexes: {}".format(word, ",".join(matched_indexes)))
+
+    # Calcula similaridade
+    words_amount = len(words)
+    result = matched_indexes_amount / words_amount
+    percent = result * 100
+
+    print("\n------------------------- Results ---------------------------")
+    print("Words amount: {}".format(str(words_amount)))
+    print("Matched indexes amount: {}".format(str(matched_indexes_amount)))
+    print("Similarity percentage: %.2f" % percent)
