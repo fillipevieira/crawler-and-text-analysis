@@ -1,4 +1,5 @@
 import nltk
+from text_analysis.settings import WORD_TOKENIZE
 
 
 class Tokenization(object):
@@ -21,9 +22,9 @@ class Tokenization(object):
     @staticmethod
     def __tokenize(content):
         """
-        Return list of words (tokenized content)
+        Return list of words or sentence (tokenized content)
         """
-        result = nltk.word_tokenize(content)
+        result = nltk.word_tokenize(content) if WORD_TOKENIZE else nltk.sent_tokenize(content)
         return result
 
     @staticmethod
@@ -37,8 +38,8 @@ class Tokenization(object):
     def start(self):
         try:
             content = self.__get_content()
-            words = self.__tokenize(content=content)
-            self.__save_file(wordlist=words)
+            tokenized_content = self.__tokenize(content=content)
+            self.__save_file(wordlist=tokenized_content)
 
         except Exception as exc:
             print('Tokenization error: {}'.format(str(exc)))

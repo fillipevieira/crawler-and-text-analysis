@@ -1,3 +1,4 @@
+from text_analysis.settings import WORD_TOKENIZE
 import re
 import nltk
 import unicodedata
@@ -19,63 +20,74 @@ class Normalization(object):
         return content
 
     @staticmethod
-    def __remove_non_ascii(words):
+    def __remove_non_ascii(contents):
         """
         Return a words list without non-ASCII characters
         """
-        words_without_non_ascii = []
-        for word in words:
-            new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
-            words_without_non_ascii.append(new_word)
-        return words_without_non_ascii
+        contents_without_non_ascii = []
+        for content in contents:
+            new_word = unicodedata.normalize('NFKD', content).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+            contents_without_non_ascii.append(new_word)
+        return contents_without_non_ascii
 
     @staticmethod
-    def __to_lowercase(words):
+    def __to_lowercase(contents):
         """
         Return characters to lowercase from tokenized words list
         """
-        words_to_lowercase = [word.lower() for word in words]
-        return words_to_lowercase
+        contents_to_lowercase = [content.lower() for content in contents]
+        return contents_to_lowercase
 
     @staticmethod
-    def __remove_punctuation(words):
+    def __remove_punctuation(contents):
         """
         Return list of tokenized words with no punctuation
         """
-        words_without_punctuation = []
-        for word in words:
-            new_word = re.sub(r'[^\w\s]', '', word)
+        contents_without_punctuation = []
+        for content in contents:
+            new_word = re.sub(r'[^\w\s]', '', content)
             if new_word != '':
-                words_without_punctuation.append(new_word)
-        return words_without_punctuation
+                contents_without_punctuation.append(new_word)
+        return contents_without_punctuation
 
     @staticmethod
-    def __remove_stopwords(words):
+    def __remove_stopwords(contents):
         """
         Return tokenized words list without stop words
         """
-        words_without_stopwords = []
-        for word in words:
-            if word not in stopwords.words('english'):
-                words_without_stopwords.append(word)
-        return words_without_stopwords
+        if WORD_TOKENIZE:
+            contents_without_stopwords = []
+            for content in contents:
+                if content not in stopwords.words('english'):
+                    contents_without_stopwords.append(content)
+            return contents_without_stopwords
+        else:
+            for key, value in enumerate(contents):
+                tokenized_sentence_list = value.split(' ')
+                aux = ''
+                for word in tokenized_sentence_list:
+                    if word not in stopwords.words('english'):
+                        aux = aux + word + ' '
+                contents[key] = aux.rstrip()
+
+            return contents
 
     @staticmethod
-    def __save_file(words):
+    def __save_file(contents):
         """
         Save normalized content.
         """
         with open('normalized-text.txt', 'w') as file:
-            file.writelines("{}\n".format(word) for word in words)
+            file.writelines("{}\n".format(content) for content in contents)
 
     def start(self):
         try:
-            wordlist = self.__get_content()
-            words = self.__remove_non_ascii(words=wordlist)
-            words = self.__to_lowercase(words=words)
-            words = self.__remove_punctuation(words=words)
-            words = self.__remove_stopwords(words=words)
-            self.__save_file(words=words)
+            contents = self.__get_content()
+            contents = self.__remove_non_ascii(contents=contents)
+            contents = self.__to_lowercase(contents=contents)
+            contents = self.__remove_punctuation(contents=contents)
+            contents = self.__remove_stopwords(contents=contents)
+            self.__save_file(contents=contents)
 
         except Exception as exc:
             print('Normalization error: {}'.format(str(exc)))
