@@ -26,7 +26,7 @@ class Normalization(object):
         """
         contents_without_non_ascii = []
         for content in contents:
-            new_word = unicodedata.normalize('NFKD', content).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+            new_word = unicodedata.normalize('NFKD', content).encode('ascii', 'ignore').decode('utf-8', 'ignore').strip()
             contents_without_non_ascii.append(new_word)
         return contents_without_non_ascii
 
@@ -39,9 +39,9 @@ class Normalization(object):
         return contents_to_lowercase
 
     @staticmethod
-    def __remove_punctuation(contents):
+    def __remove_special_character(contents):
         """
-        Return list of tokenized words with no punctuation
+        Return list of tokenized words with no special character
         """
         contents_without_punctuation = []
         for content in contents:
@@ -85,7 +85,7 @@ class Normalization(object):
             contents = self.__get_content()
             contents = self.__remove_non_ascii(contents=contents)
             contents = self.__to_lowercase(contents=contents)
-            contents = self.__remove_punctuation(contents=contents)
+            contents = self.__remove_special_character(contents=contents)
             contents = self.__remove_stopwords(contents=contents)
             self.__save_file(contents=contents)
 

@@ -30,7 +30,7 @@ class NoiseRemoval(object):
         """
         Return text without newllines
         """
-        text = text.replace("\n", '')
+        text = text.replace("\n", '').strip()
         return text
 
     @staticmethod

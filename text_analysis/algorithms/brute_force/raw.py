@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
         print("[BRUTE FORCE ALGORITHM] Word: {} | Matched indexes: {}".format(word, ",".join(matched_indexes)))
 
-    # Calcula similaridade
+    # Similarity
     words_amount = len(words)
     result = matched_indexes_amount / words_amount
     percent = result*100
