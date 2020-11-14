@@ -1,16 +1,16 @@
-from crawler.settings import SITES
+from settings import SITES
 import time
 import os
 
 
 class Capture(object):
 
-    def __init__(self, log, driver):
-        self.__log = log
+    def __init__(self, audit, driver):
+        self.__audit = audit
         self.__driver = driver
         self._sites = SITES
         self._sleep = 7
-        self.create_html_directory_if_not_exists()
+        self.create_html_folder_if_not_exists()
 
     def start(self):
         """
@@ -21,26 +21,25 @@ class Capture(object):
             for filename, url in self._sites.items():
                 html = None
 
-                self.__log.info("Crawling site: {}".format(url))
+                self.__audit.info("Crawling site: {}".format(url))
                 try:
                     self.__driver.get(url=url)
                 except:
-                    self.__log.error("An error ocurred while visiting website: {}. Skipping to next..."
-                                     .format(url))
+                    self.__audit.error("An error ocurred while visiting website: {}. Skipping to next...".format(url))
                     continue
 
-                self.__log.info('Waiting {} secs'.format(str(self._sleep)))
+                self.__audit.info('Waiting {} secs'.format(str(self._sleep)))
                 time.sleep(self._sleep)
                 html = self.__driver.page_source
 
                 self.__save_file(filename=filename, html=html)
-                self.__log.info('Getting next site...')
+                self.__audit.info('Getting next site...')
 
             self.__driver.quit()
-            self.__log.info('End')
+            self.__audit.info('End')
 
         except Exception as exc:
-            self.__log.error("An error ocurred while crawling: {}".format(str(exc)))
+            self.__audit.error("An error ocurred while crawling: {}".format(str(exc)))
             raise
 
     def __save_file(self, filename, html):
@@ -52,19 +51,19 @@ class Capture(object):
 
         """
         try:
-            self.__log.info("Saving file...")
+            self.__audit.info("Saving file...")
 
             with open('htmls/{}.html'.format(filename), 'w') as file:
                 file.write(html)
 
-            self.__log.info("File saved!")
+            self.__audit.info("File saved!")
 
         except Exception as exc:
-            self.__log.error("An error ocurred while saving file: {}".format(str(exc)))
+            self.__audit.error("An error ocurred while saving file: {}".format(str(exc)))
             raise
 
     @staticmethod
-    def create_html_directory_if_not_exists():
+    def create_html_folder_if_not_exists():
         if not os.path.exists('htmls/'):
             os.makedirs('htmls/')
 

@@ -1,4 +1,4 @@
-from text_analysis.settings import WORD_TOKENIZE
+from settings import WORD_TOKENIZE, HTML_TO_PREPROCESS
 import re
 import nltk
 import unicodedata
@@ -7,15 +7,16 @@ from nltk.corpus import stopwords
 
 class Normalization(object):
 
-    def __init__(self):
+    def __init__(self, audit):
         nltk.download('stopwords')
+        self.__audit = audit
 
     @staticmethod
     def __get_content():
         """
         Return content of tokenized text into list
         """
-        with open("tokenized-text.txt", "r") as f:
+        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/tokenized-text.txt', 'r') as f:
             content = [line.rstrip('\n') for line in f]
         return content
 
@@ -77,7 +78,7 @@ class Normalization(object):
         """
         Save normalized content.
         """
-        with open('normalized-text.txt', 'w') as file:
+        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/normalized-text.txt', 'w') as file:
             file.writelines("{}\n".format(content) for content in contents)
 
     def start(self):
@@ -90,5 +91,5 @@ class Normalization(object):
             self.__save_file(contents=contents)
 
         except Exception as exc:
-            print('Normalization error: {}'.format(str(exc)))
+            self.__audit.error('Normalization error: {}'.format(str(exc)))
             raise

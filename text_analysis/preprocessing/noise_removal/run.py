@@ -1,12 +1,14 @@
+from settings import HTML_TO_PREPROCESS
 from bs4 import BeautifulSoup
 import contractions
 
 
 class NoiseRemoval(object):
 
-    def __init__(self):
+    def __init__(self, audit):
         self.__content = None
         self.__denoised_content = None
+        self.__audit = audit
 
     def __denoise_content(self, html):
         """
@@ -42,16 +44,16 @@ class NoiseRemoval(object):
 
     def start(self, filename):
         try:
-            with open('../../htmls/' + filename, 'r') as file:
+            with open('htmls/' + filename + '.html', 'r') as file:
                 if file.mode == 'r':
                     self.__content = file.read()
 
             if self.__content:
                 self.__denoised_content = self.__denoise_content(html=self.__content)
 
-                with open('noise-free-text.txt', 'w') as file:
+                with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/noise-free-text.txt', 'w') as file:
                     file.write(self.__denoised_content)
 
         except Exception as exc:
-            print('Noise Removal error: {}'.format(str(exc)))
+            self.__audit.error('Noise Removal error: {}'.format(str(exc)))
             raise

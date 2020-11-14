@@ -9,5 +9,11 @@ SITES = {'pronounced-dead-michigan': 'https://www.mlive.com/news/2020/08/pronoun
          'tigers-cubs-lineup':  'https://www.mlive.com/tigers/2020/08/tigers-cubs-lineup-schoop-returns-candelario-remains-in-the-clean-up-spot.html'}
 
 
+####################### PREPROCESSING #######################
+HTML_TO_PREPROCESS = "pronounced-dead-michigan"
+CREATE_TOKENIZATION_AND_NORMALIZATION = True
+WORD_TOKENIZE = True
+
+
 ####################### TESTS #######################
 DEBUG = False

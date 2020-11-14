@@ -1,21 +1,22 @@
+from settings import HTML_TO_PREPROCESS, WORD_TOKENIZE
 import nltk
-from text_analysis.settings import WORD_TOKENIZE
 
 
 class Tokenization(object):
 
-    def __init__(self):
+    def __init__(self, audit):
         """
         punkt is a tokenization model for nlkt
         """
         nltk.download('punkt')
+        self.__audit = audit
 
     @staticmethod
     def __get_content():
         """
         Return content of noise free text
         """
-        with open("noise-free-text.txt", "r") as f:
+        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/noise-free-text.txt', 'r') as f:
             text = f.read()
         return text
 
@@ -32,7 +33,7 @@ class Tokenization(object):
         """
         Save tokenized content.
         """
-        with open('tokenized-text.txt', 'w') as file:
+        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/tokenized-text.txt', 'w') as file:
             file.writelines("{}\n".format(word) for word in wordlist)
 
     def start(self):
@@ -42,5 +43,5 @@ class Tokenization(object):
             self.__save_file(wordlist=tokenized_content)
 
         except Exception as exc:
-            print('Tokenization error: {}'.format(str(exc)))
+            self.__audit.error('Tokenization error: {}'.format(str(exc)))
             raise

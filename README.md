@@ -40,7 +40,7 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 ### Configurando geckoriver
 1. Com o [geckodriver](https://github.com/mozilla/geckodriver/releases) já baixado, coloque o arquivo em um diretório de sua escolha;
 2. Salve o path do local do arquivo;
-2. Acesse o diretório `crawler/` , edite o arquivo [settings.py](crawler/settings.py) e acrescente o path do arquivo do geckodriver, conforme exemplo abaixo:
+2. Acesse o arquivo [settings.py](settings.py) e acrescente o path do arquivo do geckodriver, conforme exemplo abaixo:
 ```bash
 ####################### SELENIUM #######################
 GECKODRIVER = "/var/driver/geckodriver"
@@ -50,7 +50,7 @@ GECKODRIVER = "/var/driver/geckodriver"
 
 ### Executando Web Crawler
 
-1. Acesse o diretório `crawler/` e edite o arquivo [settings.py](crawler/settings.py) para acrescentar os links da web que deseja capturar o HTML;
+1. Acesse o arquivo [settings.py](settings.py) para acrescentar os links da web que deseja capturar o HTML;
 ```bash
 ####################### CRAWLING #######################
 SITES = {'pronounced-dead-michigan': 'https://www.mlive.com/news/2020/08/pronounced-dead-michigan-woman-found-alive-at-funeral-home.html',
@@ -59,9 +59,9 @@ SITES = {'pronounced-dead-michigan': 'https://www.mlive.com/news/2020/08/pronoun
          'tigers-cubs-lineup':  'https://www.mlive.com/tigers/2020/08/tigers-cubs-lineup-schoop-returns-candelario-remains-in-the-clean-up-spot.html'}
 ```
 > **Note**: Os links desejados para captura são dispostos em um estrutura de dicionário (chave-valor) denominada SITES, onde a chave é o nome do arquivo em que o HTML vai ser salvo, e o valor é o link para a captura.
-> Dentro desse arquivo [settings.py](crawler/settings.py), já contém alguns links públicos para utilização em testes. 
+> Dentro desse arquivo [settings.py](settings.py) já contém alguns links públicos para utilização em testes. 
 
-Ao fim, dentro do diretório `crawler/`, execute o arquivo [main.py](crawler/main.py) com o seguinte comando:
+Ao fim, na raiz do projeto, execute o arquivo [main.py](main.py) com o seguinte comando:
 ```bash
 $ python main.py
 ```
