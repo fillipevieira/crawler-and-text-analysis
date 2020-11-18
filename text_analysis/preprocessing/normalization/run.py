@@ -1,4 +1,4 @@
-from settings import WORD_TOKENIZE, HTML_TO_PREPROCESS
+from settings import WORD_TOKENIZE
 import re
 import nltk
 import unicodedata
@@ -7,16 +7,16 @@ from nltk.corpus import stopwords
 
 class Normalization(object):
 
-    def __init__(self, audit):
+    def __init__(self, audit, input_file):
         nltk.download('stopwords')
         self.__audit = audit
+        self.input_file = input_file
 
-    @staticmethod
-    def __get_content():
+    def __get_content(self):
         """
         Return content of tokenized text into list
         """
-        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/tokenized-text.txt', 'r') as f:
+        with open('preprocessed_files/' + self.input_file + '/tokenized-text.txt', 'r') as f:
             content = [line.rstrip('\n') for line in f]
         return content
 
@@ -73,12 +73,11 @@ class Normalization(object):
 
             return contents
 
-    @staticmethod
-    def __save_file(contents):
+    def __save_file(self, contents):
         """
         Save normalized content.
         """
-        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/normalized-text.txt', 'w') as file:
+        with open('preprocessed_files/' + self.input_file + '/normalized-text.txt', 'w') as file:
             file.writelines("{}\n".format(content) for content in contents)
 
     def start(self):

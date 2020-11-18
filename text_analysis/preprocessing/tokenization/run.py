@@ -1,22 +1,22 @@
-from settings import HTML_TO_PREPROCESS, WORD_TOKENIZE
+from settings import WORD_TOKENIZE
 import nltk
 
 
 class Tokenization(object):
 
-    def __init__(self, audit):
+    def __init__(self, audit, input_file):
         """
         punkt is a tokenization model for nlkt
         """
         nltk.download('punkt')
         self.__audit = audit
+        self.input_file = input_file
 
-    @staticmethod
-    def __get_content():
+    def __get_content(self):
         """
         Return content of noise free text
         """
-        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/noise-free-text.txt', 'r') as f:
+        with open('preprocessed_files/' + self.input_file + '/noise-free-text.txt', 'r') as f:
             text = f.read()
         return text
 
@@ -28,12 +28,11 @@ class Tokenization(object):
         result = nltk.word_tokenize(content) if WORD_TOKENIZE else nltk.sent_tokenize(content)
         return result
 
-    @staticmethod
-    def __save_file(wordlist):
+    def __save_file(self, wordlist):
         """
         Save tokenized content.
         """
-        with open('preprocessed_files/' + HTML_TO_PREPROCESS + '/tokenized-text.txt', 'w') as file:
+        with open('preprocessed_files/' + self.input_file + '/tokenized-text.txt', 'w') as file:
             file.writelines("{}\n".format(word) for word in wordlist)
 
     def start(self):

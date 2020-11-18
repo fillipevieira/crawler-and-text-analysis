@@ -34,11 +34,11 @@ def brute_force(text, pattern):
 if __name__ == "__main__":
 
     # Faz a leitura do arquivo que contem o texto preprocessado de um HTML
-    with open("../../preprocessing/noise-free-text.txt", "r") as file:
+    with open("../../../preprocessed_files/pronounced-dead-michigan/noise-free-text.txt", "r") as file:
         text = file.read().lower()
 
     # Faz a leitura do arquivo que contem com as palavras preprocessadas de um HTML
-    with open("../../preprocessing/normalized-text.txt", "r") as file:
+    with open("../../../preprocessed_files/pronounced-dead-michigan/normalized-text.txt", "r") as file:
         words = [word.replace("\n", "") for word in file.readlines()]
         words = list(set(words))
 
