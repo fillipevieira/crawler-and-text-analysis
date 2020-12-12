@@ -1,7 +1,5 @@
 # Web Crawler and Text Analysis
 
-> Finalidade para pesquisa de algoritmos de análise textual. 
-
 O projeto tem o propósito de dar apoio técnico e prático para uma pesquisa de aplicação de algoritmos de análise textual com foco em identificação de 
 paǵinas web duplicadas, fornecendo um ambiente de fácil interação e entendimento.
 
@@ -76,7 +74,7 @@ $ python main.py crawler
 ```
 
 O processo de crawling será iniciado e os HTML's serão salvos no diretório `htmls/` na raiz do projeto, que por sua vez, é criado automaticamente.
-Para lista os htmls capturados, utilize o seguinte comando:
+Para listar os htmls capturados, utilize o seguinte comando:
 ```bash
 $ python main.py list-htmls
 ```
@@ -96,7 +94,7 @@ HTML:
 $ python main.py preprocessing <filename_to_preprocess>
 ```
 
-Para lista os HTMLs pré-processados, utilize o seguinte comando:
+Para listar os HTMLs pré-processados, utilize o seguinte comando:
 ```bash
 $ python main.py list-preprocessed-htmls
 ```
