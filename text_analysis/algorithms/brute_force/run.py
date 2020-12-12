@@ -1,63 +1,51 @@
-"""
-Esse algoritmo tera como entradas:
-
-- padrao: sera um elementos da lista de palavras que foram processadas e geradas na etapa
-          de preprocessamento (noise_removal, word tokenization e normalization).
-
-- texto: sera o conteudo em texto de um html preprocessado apenas na etapa de noise_removal.
-
-Tera como retorno quais os indices na string do texto que deram match com o padrao.
-
-Pontos negativos:
- - se o padrao tem um tamanho muito pequeno, tipo uma ṕalavra "e", o algoritmo sempre vai pegar janelas desse mesmo
-   tamanho e, nesse caso, palavras com "e" no meio dariam matches sem ser exatamente a palavra isolada.
-
-"""
+import datetime
 
 
-def brute_force(text, pattern):
-    integers = list()
-    n_text = len(text)
-    n_pattern = len(pattern)
-    for i in range(n_text - n_pattern):
-        j = 0
+class BruteForce(object):
 
-        while j < n_pattern and text[i+j] == pattern[j]:
-            j += 1
+    def start(self, html_1, html_2):
+        pattern = "preprocessed_files/" + html_1 + "/normalized-text.txt"
+        base_text = "preprocessed_files/" + html_2 + "/noise-free-text.txt"
 
-        if j == n_pattern:
-            integers.append(str(i))
+        with open(pattern, "r") as file:
+            words = [word.replace("\n", "") for word in file.readlines()]
+            words = list(set(words))
 
-    return integers
+        with open(base_text, "r") as file:
+            text = file.read().lower()
 
+        start = datetime.datetime.now()
+        matched_indexes_amount = 0
+        for word in words:
+            matched_indexes = self.compare(text=text, pattern=word)
+            if matched_indexes:
+                matched_indexes_amount += 1
 
-if __name__ == "__main__":
+            print("[BRUTE FORCE ALGORITHM] Word: {} | Matched indexes: {}".format(word, ",".join(matched_indexes)))
 
-    # Faz a leitura do arquivo que contem o texto preprocessado de um HTML
-    with open("../../../preprocessed_files/pronounced-dead-michigan/noise-free-text.txt", "r") as file:
-        text = file.read().lower()
+        end = datetime.datetime.now()
 
-    # Faz a leitura do arquivo que contem com as palavras preprocessadas de um HTML
-    with open("../../../preprocessed_files/pronounced-dead-michigan/normalized-text.txt", "r") as file:
-        words = [word.replace("\n", "") for word in file.readlines()]
-        words = list(set(words))
+        words_amount = len(words)
+        result = matched_indexes_amount / words_amount
+        percent = result * 100
 
-    # Aplica o algoritmo utilizando o texto preprocessado de um HTML e cada palavra da lista de
-    # palavras preprocessadas de um HTML
-    matched_indexes_amount = 0
-    for word in words:
-        matched_indexes = brute_force(text=text, pattern=word)
-        if matched_indexes:
-            matched_indexes_amount += 1
+        print("\n------------------------- Results ---------------------------")
+        print("Duration: {}".format(end - start))
+        print("Words amount: {}".format(str(words_amount)))
+        print("Matched indexes amount: {}".format(str(matched_indexes_amount)))
+        print("Similarity percentage: %.2f" % percent)
 
-        print("[BRUTE FORCE ALGORITHM] Word: {} | Matched indexes: {}".format(word, ",".join(matched_indexes)))
+    def compare(self, text, pattern):
+        integers = list()
+        n_text = len(text)
+        n_pattern = len(pattern)
+        for i in range(n_text - n_pattern):
+            j = 0
 
-    # Similarity
-    words_amount = len(words)
-    result = matched_indexes_amount / words_amount
-    percent = result*100
+            while j < n_pattern and text[i+j] == pattern[j]:
+                j += 1
 
-    print("\n------------------------- Results ---------------------------")
-    print("Words amount: {}".format(str(words_amount)))
-    print("Matched indexes amount: {}".format(str(matched_indexes_amount)))
-    print("Similarity percentage: %.2f" % percent)
+            if j == n_pattern:
+                integers.append(str(i))
+
+        return integers

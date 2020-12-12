@@ -7,12 +7,14 @@ paǵinas web duplicadas, fornecendo um ambiente de fácil interação e entendim
 
 O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os algoritmos de análise textual, juntamente com rotinas de pré-processamento de texto.
 
+<p align="center"><img src="docs/image/general_pipeline.png"></p>
+
 ## Conteúdo
 
 - [Quick Start](#quick-start)
-- [Web Crawler](#web-crawler)
-- [Pré Processamento de Texto](#pre-process)
-- [Algoritmos de Análise Textual](#text-analysis)
+- [Captura](#web-crawler)
+- [Pré Processamento](#pre-process)
+- [Análise](#text-analysis)
 - [Contribuição](#contributing)
 - [Contribuidores](#contributors)
 
@@ -46,7 +48,14 @@ O projeto possui um Web Crawler para a captura de HTML's, e um diretório com os
 GECKODRIVER = "/var/driver/geckodriver"
 ```
 
-## <a name="web-crawler"></a>Web Crawler
+### Help
+
+Para acessar os comandos de execução de cada etapa da aplicação, execute o comando abaixo na raiz do projeto:
+```bash
+$ python main.py help
+```
+
+## <a name="web-crawler"></a>Captura
 
 ### Executando Web Crawler
 
@@ -63,20 +72,53 @@ SITES = {'pronounced-dead-michigan': 'https://www.mlive.com/news/2020/08/pronoun
 
 Ao fim, na raiz do projeto, execute o arquivo [main.py](main.py) com o seguinte comando:
 ```bash
-$ python main.py
+$ python main.py crawler
 ```
 
 O processo de crawling será iniciado e os HTML's serão salvos no diretório `htmls/` na raiz do projeto, que por sua vez, é criado automaticamente.
+Para lista os htmls capturados, utilize o seguinte comando:
+```bash
+$ python main.py list-htmls
+```
 
-## <a name="pre-process"></a>Pré Processamento de Texto
+## <a name="pre-process"></a>Pré Processamento
 
-1. Acesse o diretório `text_analysis/preprocessing`;
+O pré-processamento ou preparação dos dados é a primeira etapa do
+processo de análise textual para a identificação de páginas web duplicadas, e
+envolve a seleção dos dados que constituem a base de textos de interesse para
+tentar selecionar o núcleo que melhor expressa o conteúdo destes textos.
 
-- Em desenvolvimento.
+<p align="center"><img src="docs/image/preprocessing_pipeline.png"></p>
 
-## <a name="text-analysis"></a>Algoritmos de análise textual
+Na raiz do projeto, execute o arquivo [main.py](main.py) com o seguinte argumento para iniciar o pré-processamento de um 
+HTML:
+```bash
+$ python main.py preprocessing <filename_to_preprocess>
+```
 
-- Em desenvolvimento.
+Para lista os HTMLs pré-processados, utilize o seguinte comando:
+```bash
+$ python main.py list-preprocessed-htmls
+```
+
+## <a name="text-analysis"></a>Análise
+
+A etapa de Análise é a última etapa do processo de análise textual para a
+identificação de páginas web duplicadas. Neste ponto, é realizado a aplicação de
+algoritmos de análise de texto com o propósito de achar ocorrências de um
+determinado padrão dentro de um texto.
+A principal diferença entre os algoritmos são as suas diferentes maneiras de
+implementação. Neste projeto são testados dois algoritmos diferentes: ​ Brute Force
+e Rabin-Karp.
+
+Para executar os algoritmos utilizando os arquivos preprocessados, na raiz do projeto, execute o arquivo [main.py](main.py) com o seguinte argumento:
+```bash
+$ python main.py brute-force-analyze <preprocessed_html_1> <preprocessed_html_2>
+```
+ou
+```bash
+$ python main.py rabin-karp-analyze <preprocessed_html_1> <preprocessed_html_2>
+```
 
 ## <a name="contributing"></a>Contribuição
 
