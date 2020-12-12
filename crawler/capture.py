@@ -9,7 +9,7 @@ class Capture(object):
         self.__audit = audit
         self.__driver = driver
         self._sites = SITES
-        self._sleep = 7
+        self._sleep = 3
         self.create_html_folder_if_not_exists()
 
     def start(self):
