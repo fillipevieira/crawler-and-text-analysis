@@ -9,15 +9,22 @@ import os
 
 def help():
     print("\n")
-    print("Argumentos válidos:")
+    print("----------------------------------------------------------------------------------------------")
+    print("Argumentos para execução do WEB CRAWLER:")
     print("- crawler: executa web crawler")
     print("- list-htmls: realiza a listagem de todos os htmls salvos pelo web crawler")
+    print("\n")
+    print("Argumentos para execução do PREPROCESSING:")
     print("- preprocessing <filename_to_preprocess>: executa a rotina de pré-processamento para o arquivo html citado")
     print("- list-preprocessed-htmls: realiza a listagem de todos os htmls preprocessados")
+    print("\n")
+    print("Argumentos para execução do ANALYZE:")
     print("- brute-force-analyze <preprocessed_html_1> <preprocessed_html_2>: executa o algoritmo Brute Force entre os htmls citados")
     print("- rabin-karp-analyze <preprocessed_html_1> <preprocessed_html_2>: executa o algoritmo Rabin-Karp entre os htmls citados")
     print("\n")
+    print("Other commands:")
     print("- help: exibe argumentos válidos da aplicação")
+    print("----------------------------------------------------------------------------------------------")
     print("\n")
 
 
