@@ -27,6 +27,6 @@ textsearch==0.0.17
 thinc==7.4.1
 tqdm==4.48.2
 Unidecode==1.1.1
-urllib3==1.25.10
+urllib3==1.26.5
 wasabi==0.7.1
 zipp==3.1.0
